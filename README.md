@@ -16,3 +16,4 @@ Each branch below contains only the completed sections (current + previous).
 | 07 | `07-google-sheets-automation` | Automate Google Sheets + daily AI summaries via email |
 | 08 | `08-vision-voice-multimodal` | Read/generate images and communicate via voice |
 | 09 | `09-rag-system` | Full RAG system: document interaction & embedding storage |
+| 10 | `10-web-search-newsletter` | Search the web in Python and turn results into newsletters |
