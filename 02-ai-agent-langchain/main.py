@@ -1,23 +1,30 @@
-from langchain.chat_models import init_chat_model
+from dotenv import load_dotenv
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain.agents import create_agent
 
-import os
+# 01-laod env variable
+load_dotenv()
 
-GOOGLE_API_KEY = os.environ["GOOGLE_API_KEY"]
-
-# 1. Initialize the chat model
-model = init_chat_model(
+# 02 init llm model
+llm = ChatGoogleGenerativeAI(
     model="gemini-3.8-flash",
-    model_provider="google_genai",
-    api_key=GOOGLE_API_KEY
-    # max_token,
+    max_tokens=None,
+    timeout=None,
+    max_retries=2,
+    # other params...
 )
 
-# open file
-with open('oops.txt') as file:
-    op = file.read()
-# 2. Invoke the model with a prompt
-response = model.invoke(f"whati is best oppurnities for the future  {op}?")
+# 03-request  prompt
+messages = [{
+    "role":"user",
+    "content":"what do you think about ai engineer carear in saudi arabia?"
+}]
+
+# 04 create agent
+agent = create_agent(model=llm)
+
+# 05- invoke message
+response = agent.invoke({"messages":messages})
 
 
-# 3. Print the text content
-print(response.content[0]['text'])
+print(response['messages'][-1].content[0]['text'])
