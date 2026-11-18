@@ -8,3 +8,4 @@ Each branch below contains only the completed sections (current + previous).
 | # | Folder | Topic |
 |---|--------|-------|
 | 01 | `01-setup` | Environment setup |
+| 02 | `02-ai-agent-langchain` | Build AI agents in Python with LangChain |
