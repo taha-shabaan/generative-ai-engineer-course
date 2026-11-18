@@ -15,3 +15,4 @@ Each branch below contains only the completed sections (current + previous).
 | 06 | `06-structured-output-pydantic` | Structured JSON output from LLMs with Pydantic |
 | 07 | `07-google-sheets-automation` | Automate Google Sheets + daily AI summaries via email |
 | 08 | `08-vision-voice-multimodal` | Read/generate images and communicate via voice |
+| 09 | `09-rag-system` | Full RAG system: document interaction & embedding storage |
