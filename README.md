@@ -11,3 +11,4 @@ Each branch below contains only the completed sections (current + previous).
 | 02 | `02-ai-agent-langchain` | Build AI agents in Python with LangChain |
 | 03 | `03-agent-memory-sqlite-postgres` | Agent memory: conversations in SQLite & PostgreSQL |
 | 04 | `04-flask-chat-app` | Flask web apps with chat history and user location |
+| 05 | `05-local-free-llms` | Run free & private LLMs locally, served through your API |
