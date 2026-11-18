@@ -13,3 +13,4 @@ Each branch below contains only the completed sections (current + previous).
 | 04 | `04-flask-chat-app` | Flask web apps with chat history and user location |
 | 05 | `05-local-free-llms` | Run free & private LLMs locally, served through your API |
 | 06 | `06-structured-output-pydantic` | Structured JSON output from LLMs with Pydantic |
+| 07 | `07-google-sheets-automation` | Automate Google Sheets + daily AI summaries via email |
