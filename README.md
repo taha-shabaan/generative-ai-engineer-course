@@ -17,3 +17,4 @@ Each branch below contains only the completed sections (current + previous).
 | 08 | `08-vision-voice-multimodal` | Read/generate images and communicate via voice |
 | 09 | `09-rag-system` | Full RAG system: document interaction & embedding storage |
 | 10 | `10-web-search-newsletter` | Search the web in Python and turn results into newsletters |
+| 11 | `11-coding-agent` | Coding agent that interacts with files on your computer |
