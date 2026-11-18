@@ -7,3 +7,4 @@ Each branch below contains only the completed sections (current + previous).
 
 | # | Folder | Topic |
 |---|--------|-------|
+| 01 | `01-setup` | Environment setup |
