@@ -1,4 +1,0 @@
-backend
-frontend
-full stack
-ai engineer
