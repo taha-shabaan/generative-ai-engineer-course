@@ -14,13 +14,14 @@ def find_city_highest_salary():
     """"return city has highest salary please..."""
     return "city name"
 
+
 # 01-laod env variable
 load_dotenv()
 
 # 02 init llm model
 llm = ChatGoogleGenerativeAI(
-    model="gemini-3.8-flash",
-    max_tokens=1000,
+    model="gemini-3.5-flash",
+    max_tokens=500,
     timeout=None,
     max_retries=2,
     # other params...
