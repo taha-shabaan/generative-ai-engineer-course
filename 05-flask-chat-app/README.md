@@ -1,3 +1,3 @@
-# 06-structured-output-pydantic
+# 05-flask-chat-app
 
 TODO: add notes and code for this section.
