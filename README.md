@@ -8,5 +8,4 @@ Each branch below contains only the completed sections (current + previous).
 | # | Folder | Topic |
 |---|--------|-------|
 | 01 | `01-setup` | Environment setup |
-| 02 | `02-ai-agent-langchain` | Build AI agents in Python with LangChain (framework cleaned) |
-| 03 | `03-build_weather_ai_agent` | Weather AI agent with LangGraph and OpenWeather integration |
+| 02 | `02-ai-agent-langchain` | Build AI agents in Python with LangChain |
