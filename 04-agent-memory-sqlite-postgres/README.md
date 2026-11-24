@@ -1,3 +1,3 @@
-# 04-flask-chat-app
+# 04-agent-memory-sqlite-postgres
 
 TODO: add notes and code for this section.
