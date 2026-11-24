@@ -1,3 +1,3 @@
-# 05-local-free-llms
+# 10-rag-system
 
 TODO: add notes and code for this section.
