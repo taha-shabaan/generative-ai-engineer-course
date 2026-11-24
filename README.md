@@ -9,4 +9,5 @@ Each branch below contains only the completed sections (current + previous).
 |---|--------|-------|
 | 01 | `01-setup` | Environment setup |
 | 02 | `02-ai-agent-langchain` | Build AI agents in Python with LangChain |
+| 03 | `03-build_weather_ai_agent` | Weather AI agent with LangGraph and OpenWeather integration |
 | 04 | `04-agent-memory-sqlite-postgres` | Agent memory: conversations in SQLite & PostgreSQL |
