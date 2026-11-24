@@ -1,3 +1,3 @@
-# 03-agent-memory-sqlite-postgres
+# 06-local-free-llms
 
 TODO: add notes and code for this section.

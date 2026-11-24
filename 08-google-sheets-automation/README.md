@@ -1,3 +1,3 @@
-# 11-coding-agent
+# 08-google-sheets-automation
 
 TODO: add notes and code for this section.
