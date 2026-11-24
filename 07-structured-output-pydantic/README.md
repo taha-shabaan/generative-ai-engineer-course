@@ -1,3 +1,3 @@
-# 06-structured-output-pydantic
+# 07-structured-output-pydantic
 
 TODO: add notes and code for this section.
