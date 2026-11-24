@@ -1,61 +1,84 @@
-from langchain.tools import tool
-from langchain.agents import create_agent
-import os
-from langchain_google_genai import ChatGoogleGenerativeAI
-import requests
 from dotenv import load_dotenv
+from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain.agents import create_agent
+from langgraph.checkpoint.memory import InMemorySaver
+from langchain.tools import tool
+import requests
+import os
 
-
+# Load environment variables
 load_dotenv()
 
+# Define weather tool
 @tool
-def get_weather(city: str) -> str:
-    """Get the current weather for a city.
-
-    Args:
-        city: Name of the city, e.g. "London" or "Cairo".
-
-    Returns:
-        A short description of the current weather and temperature.
-    """
+def get_weather(city: str):
+    """Get the current weather for a given city."""
     api_key = os.getenv("OPENWEATHER_API_KEY")
-    base_url = "https://api.openweathermap.org/data/2.5/weather"
-    params = {
-        "q": city,
-        "appid": api_key,
-        "units": "metric",
-    }
-    response = requests.get(base_url, params=params, timeout=10)
-    response.raise_for_status()
-    data = response.json()
+    if not api_key:
+        return "Error: OPENWEATHER_API_KEY not found in environment variables."
 
-    condition = data["weather"][0]["description"]
-    temperature = data["main"]["temp"]
-    return f"Weather in {city} is {condition}, and the temperature is {temperature}°C."
+    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
+    try:
+        response = requests.get(url)
+        data = response.json()
+        if response.status_code != 200:
+            return f"Error: {data.get('message', 'Unknown error')}"
+        return f"{city}: {data['weather'][0]['description']}, {data['main']['temp']}°C, feels like {data['main']['feels_like']}°C"
+    except Exception as e:
+        return f"Error fetching weather: {str(e)}"
 
 
-if __name__ == "__main__":
-    query = input("Enter your query: ")
-
-    system_prompt = """
-    You are a helpful weather expert.
-    When asked about the weather in a city, use your weather tool to get the current data and always respond in this exact format:
-    Weather in {city} is {condition}, and the temperature is {temperature}.
+@tool
+def get_location():
     """
+      function return curretn location for the user
+    """
+    location_url ="https://ipapi.co/json"
+    response=requests.get(location_url)
+    data = response.json()
+    print(data)
+    return f"city:.. and country:from {data}"
 
-    llm = ChatGoogleGenerativeAI(
-        model="gemini-3.5-flash",
-        max_tokens=1000,
-        timeout=None,
-        max_retries=2,
-        api_key=os.getenv("GOOGLE_API_KEY"),
-    )
 
-    agent = create_agent(
-        model=llm,
-        tools=[get_weather],
-        system_prompt=system_prompt,
-    )
+@tool
+def get_city_time(city: str):
+    """Get the current time for a given city."""
+    return f"Current time in {city}: (placeholder - integrate with worldtime API)"
 
-    result = agent.invoke({"messages": [{"role": "user", "content": query}]})
-    print(result["messages"][-1].content)
+
+# Initialize LLM
+llm = ChatGoogleGenerativeAI(
+    model="gemini-3.8-flash",
+    max_tokens=500,
+    timeout=None,
+    max_retries=2,
+)
+
+# System prompt
+system_prompt = """
+You are a helpful weather assistant.
+Use the available tools to get weather information for cities around the world.
+Use the available tools to get the current user's location and return with the same output.
+"""
+
+# Create agent
+agent = create_agent(
+    model=llm,
+    tools=[get_weather, get_city_time, get_location],
+    system_prompt=system_prompt,
+    checkpointer=InMemorySaver()
+)
+
+if __name__=="__main__":
+    # Interactive loop
+    print("Weather AI Agent ready! Type 'exit' to quit.")
+    while True:
+        user_input = input("\nEnter city name: ")
+        if user_input.lower() in ["exit", "quit"]:
+            break
+
+
+        messages = [{"role": "user", "content": user_input}]
+        thread_config = {"configurable": {"thread_id": "1"}}
+        response = agent.invoke({"messages": messages}, thread_config)
+        print("\n" + response['messages'][-1].content[0]['text'])
