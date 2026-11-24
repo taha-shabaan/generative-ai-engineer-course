@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain.agents import create_agent
+from langgraph.checkpoint.memory import InMemorySaver
 from langchain.tools import tool
 import requests
 import os
@@ -26,7 +26,7 @@ def get_weather(city: str):
     except Exception as e:
         return f"Error fetching weather: {str(e)}"
 
-# @tool
+
 def get_location():
     """
       function return curretn location for the user
@@ -37,6 +37,7 @@ def get_location():
     print(data)
     return f"city:.. and country:from {data}"
 
+
 @tool
 def get_city_time(city: str):
     """Get the current time for a given city."""
@@ -45,7 +46,7 @@ def get_city_time(city: str):
 
 # Initialize LLM
 llm = ChatGoogleGenerativeAI(
-    model="gemini-3.5-flash",
+    model="gemini-3.8-flash",
     max_tokens=500,
     timeout=None,
     max_retries=2,
@@ -54,8 +55,8 @@ llm = ChatGoogleGenerativeAI(
 # System prompt
 system_prompt = """
 You are a helpful weather assistant.
-Use the available tools to get weather information for cities around the world .
-use the avilable tools for get location the curretn user and return with the same ouptut.
+Use the available tools to get weather information for cities around the world.
+Use the available tools to get the current user's location and return with the same output.
 """
 
 # Create agent
@@ -63,6 +64,7 @@ agent = create_agent(
     model=llm,
     tools=[get_weather, get_city_time, get_location],
     system_prompt=system_prompt,
+    checkpointer=InMemorySaver()
 )
 
 if __name__=="__main__":
@@ -73,6 +75,8 @@ if __name__=="__main__":
         if user_input.lower() in ["exit", "quit"]:
             break
 
+
         messages = [{"role": "user", "content": user_input}]
-        response = agent.invoke({"messages": messages})
+        thread_config = {"configurable": {"thread_id": "1"}}
+        response = agent.invoke({"messages": messages}, thread_config)
         print("\n" + response['messages'][-1].content[0]['text'])
