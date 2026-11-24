@@ -1,3 +1,3 @@
-# 06-structured-output-pydantic
+# 09-vision-voice-multimodal
 
 TODO: add notes and code for this section.
