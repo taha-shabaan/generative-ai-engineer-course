@@ -1,3 +1,3 @@
-# 09-rag-system
+# 04-agent-memory-sqlite-postgres
 
 TODO: add notes and code for this section.

@@ -1,3 +1,3 @@
-# 04-flask-chat-app
+# 08-google-sheets-automation
 
 TODO: add notes and code for this section.
