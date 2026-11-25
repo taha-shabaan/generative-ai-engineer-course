@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather AI Agent</title>
+  <!-- We will link our CSS file here in the next step -->
+  <link rel="stylesheet" href={{url_for('static',filename="style.css")}} />
+</head>
+<body>
+  <div class="chat-app">
+
+    <!-- 1. Top Header -->
+    <header class="chat-header">
+      <h1>Weather AI Agent</h1>
+      <p>Ask me about the weather anywhere in the world.</p>
+    </header>
+
+    <!-- 2. Chat Messages Area -->
+    <main class="chat-messages" id="chat-messages" aria-live="polite">
+      <!-- Example Bot Message -->
+      <article class="message bot-message">
+        <p>Hello! Ask me for the current weather or forecast for any city.</p>
+      </article>
+
+      <!-- Example User Message -->
+      <article class="message user-message">
+        <p>What is the weather in Cairo today?</p>
+      </article>
+    </main>
+
+    <!-- 3. Message Input Form -->
+    <form class="chat-form" id="chat-form">
+      <label for="user-input" class="sr-only">Type your message</label>
+      <input
+        type="text"
+        id="user-input"
+        name="message"
+        placeholder="Ask about the weather..."
+        autocomplete="off"
+        required
+      />
+      <button type="submit" id="send-btn">Send</button>
+    </form>
+
+  </div>
+
+  <!-- We will connect our JavaScript file here later -->
+  <script src="app.js"></script>
+</body>
+</html>
