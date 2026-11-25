@@ -1,13 +1,15 @@
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.agents import create_agent
-from langgraph.checkpoint.sqlite import SqliteSaver
+from langgraph.checkpoint.postgres import PostgresSaver
 from langchain.tools import tool
 import requests
 import os
 
 # Load environment variables
 load_dotenv()
+DB_URL=os.getenv("SUPASE_DB_URL")
+
 
 # Define weather tool
 @tool
@@ -45,6 +47,10 @@ def get_city_time(city: str):
     """Get the current time for a given city."""
     return f"Current time in {city}: (placeholder - integrate with worldtime API)"
 
+# # Initialize DuckDuckGo search tool, setting the name to "web_search" is important
+# web_search = DuckDuckGoSearchResults(
+#     name="web_search", output_format="list", num_results=5
+# )
 
 # Initialize LLM gemma-4
 llm = ChatGoogleGenerativeAI(
@@ -71,7 +77,8 @@ Use the available tools to get the current user's location and return with the s
 # persistence data with sqlite
 
 if __name__=="__main__":
-    with SqliteSaver.from_conn_string("data.db") as checkpointer:
+    with PostgresSaver.from_conn_string(str(DB_URL)) as checkpointer:
+        checkpointer.setup()
         # Create agent
         agent = create_agent(
             model=llm,
