@@ -18,19 +18,25 @@
 
     <!-- 2. Chat Messages Area -->
     <main class="chat-messages" id="chat-messages" aria-live="polite">
-      <!-- Example Bot Message -->
-      <article class="message bot-message">
-        <p>Hello! Ask me for the current weather or forecast for any city.</p>
-      </article>
-
-      <!-- Example User Message -->
-      <article class="message user-message">
-        <p>What is the weather in Cairo today?</p>
-      </article>
+      {% if messages %}
+        {% for msg in messages %}
+          {% if msg.type == "ai" %}
+            <article class="message ai-message">
+              <p>{{ msg.message }}</p>
+            </article>
+          {% elif msg.type == "user" %}
+            <article class="message user-message">
+              <p>{{ msg.message }}</p>
+            </article>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
     </main>
 
+
+
     <!-- 3. Message Input Form -->
-    <form class="chat-form" id="chat-form">
+    <form class="chat-form" id="chat-form" method="post", action="/api/chat">
       <label for="user-input" class="sr-only">Type your message</label>
       <input
         type="text"
@@ -46,6 +52,6 @@
   </div>
 
   <!-- We will connect our JavaScript file here later -->
-  <script src="app.js"></script>
+  <!--<script for_url=((src="script.js"))></script>-->
 </body>
 </html>

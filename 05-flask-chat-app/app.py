@@ -7,6 +7,7 @@ def create_app()->Flask:
     app = Flask(__name__)
     # app.config.from_object(Config)
     app.config.from_object(Config)
+    app.secret_key = "my_secret_key"
 
     # production logging
     logging.basicConfig(
@@ -16,15 +17,15 @@ def create_app()->Flask:
 
     # from routes import api_bp
     # import routes
-    print("Loaded routes from:", routes.__file__)
+    # print("Loaded routes from:", routes.__file__)
 
     app.register_blueprint(routes.api_bp)
-    print("Registered routes:", app.url_map)
+    # print("Registered routes:", app.url_map)
     return app
 
 
 if __name__ == "__main__":
-    print("welcome to the weather ai agent!")
+    # print("welcome to the weather ai agent!")
     app=create_app()
     app.run(host="127.0.0.1", port=5000, debug=True)
 
