@@ -36,7 +36,7 @@
 
 
     <!-- 3. Message Input Form -->
-    <form class="chat-form" id="chat-form" method="post", action="/api/chat">
+    <form class="chat-form" id="chat-form" method="post" action="/api/chat">
       <label for="user-input" class="sr-only">Type your message</label>
       <input
         type="text"
@@ -51,7 +51,6 @@
 
   </div>
 
-  <!-- We will connect our JavaScript file here later -->
-  <!--<script for_url=((src="script.js"))></script>-->
+  <script src={{ url_for('static', filename='script.js') }}></script>
 </body>
 </html>
